@@ -63,7 +63,7 @@ public class MuezliLogin extends JavaPlugin{
 		//create config if it doesn't exsist
 		createConfig();
 	}
-    
+	
 	//Creates the config file
 	public void createConfig(){
 		File file = new File(getDataFolder()+File.separator+"config.yml");
@@ -128,7 +128,7 @@ public class MuezliLogin extends JavaPlugin{
 							if (privateLoginMessage == "") {
 								player.sendMessage(ChatColor.DARK_GREEN + "You haven't set a custom login message yet.");
 							}else {
-								this.getConfig().set("loginMessages." + playerName, "");
+								this.getConfig().set("loginMessages." + playerName, null);
 								saveConfig();
 								player.sendMessage(ChatColor.DARK_GREEN + "Your custom login message has been removed");
 							}

@@ -34,11 +34,11 @@ public class PlayerListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		String privateLoginMessage = plugin.getConfig().getString("loginMessages." + player.getName());
-		if (privateLoginMessage == "") {
+		if (privateLoginMessage == null) {
 			String country = plugin.getGeoIPLookup().getCountry(player.getAddress().getAddress()).getName();
-			event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " joined from " + ChatColor.GOLD + country);
+				event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has joined from " + ChatColor.GOLD + country);
 		}else {
-			event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " joined from " + ChatColor.GOLD + privateLoginMessage);
+			event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has joined from " + ChatColor.GOLD + privateLoginMessage);
 		}
 	}
 	
