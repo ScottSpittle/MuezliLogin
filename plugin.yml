@@ -1,0 +1,12 @@
+name: MuezliLogin
+main: me.ScottSpittle.MuezliLogin.MuezliLogin
+authors: [ScottSpittle]
+version: 1.0
+softdepend: [Vault]
+description: MuezliLogin plugin.
+commands:
+  login:
+    description: Help about this plugin.
+    usage: |
+        /<command> set <custom message> - Sets a new custom login message.
+        /<command> remove - Reset login back to default.
