@@ -1,8 +1,8 @@
 name: MuezliLogin
 main: me.ScottSpittle.MuezliLogin.MuezliLogin
 authors: [ScottSpittle]
-version: 1.0
-softdepend: [Vault]
+version: 1.0.1
+softdepend: [Vault, GeoIPTools]
 description: MuezliLogin plugin.
 commands:
   login:

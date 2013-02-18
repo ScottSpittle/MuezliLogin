@@ -34,7 +34,7 @@ public class PlayerListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		String privateLoginMessage = plugin.getConfig().getString("loginMessages." + player.getName());
-		if (player.hasPermission("login.mod")){
+		if (player.hasPermission("muezli.login.silent")){
 			privateLoginMessage = null;
 		}
 		else {
