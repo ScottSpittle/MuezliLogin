@@ -21,29 +21,37 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;;
 
 public class PlayerListener implements Listener {
 
 	public static MuezliLogin plugin;
-	
-	public PlayerListener(MuezliLogin instance){
+
+	public PlayerListener(MuezliLogin instance) {
 		plugin = instance;
 	}
 
-    @EventHandler
+	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		String privateLoginMessage = plugin.getConfig().getString("loginMessages." + player.getName());
-		if (player.hasPermission("muezli.login.silent")){
-			privateLoginMessage = null;
+		String privateLoginMessage = plugin.getConfig().getString(
+				"loginMessages." + player.getName());
+		if (player.hasPermission("muezli.login.silent")) {
+			event.setJoinMessage("");
+			return;
+		} else if (privateLoginMessage == null) {
+			String country = plugin.getGeoIPLookup().getCountry(player.getAddress().getAddress()).getName();
+			event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has joined from " + ChatColor.GOLD + country);
+		} else {
+			event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has joined from " + ChatColor.GOLD + privateLoginMessage);
 		}
-		else {
-			if (privateLoginMessage == null) {
-				String country = plugin.getGeoIPLookup().getCountry(player.getAddress().getAddress()).getName();
-					event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has joined from " + ChatColor.GOLD + country);
-			}else {
-				event.setJoinMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has joined from " + ChatColor.GOLD + privateLoginMessage);
-			}
+	}
+	
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent event) {
+		Player player = event.getPlayer();
+		if (player.hasPermission("muezli.login.silent")) {
+			event.setQuitMessage("");
 		}
-    }
+	}
 }
